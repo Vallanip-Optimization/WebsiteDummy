@@ -6,7 +6,7 @@ let inputs;
 let progress;
 let simulation;
 let scenario_id;
-let scenarioID=124;
+let scenarioID=1; // use default value of 1
 
 window.onload = () => {
     // connect html elements to JS-variables
@@ -22,7 +22,7 @@ function runSimulation() {
     cloudClient.getLatestModelVersion( "AAirportSecurityDemo" )
         .then( version => {
             inputs = cloudClient.createDefaultInputs( version );
-            // inputs.setInput( "Scenario ID", scenarioID );
+            inputs.setInput( "Scenario ID", scenarioID );
             inputs.setInput( "{STOP_TIME}", 5256000 ); // 10 years in mins
             text_inputs.innerHTML = "setting inputs: Scenario ID="+parseInt(scenario_id.value)+" <br>";
             simulation = cloudClient.createSimulation(inputs);
@@ -51,7 +51,7 @@ function runSimulation() {
 }
 
 function changeScenarioID() {
-    inputs.setInput( "Scenario ID", parseInt(scenario_id.value)); // get int-value from editbox
+    scenarioID = parseInt(scenario_id.value); // store locally here so runSimulation() can pick it up when starting
 }
 
 let pollingInterval;
