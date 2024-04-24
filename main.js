@@ -4,6 +4,7 @@ let runButton;
 let info;
 let inputs;
 let progress;
+let simulation;
 
 window.onload = () => {
     runButton = document.getElementById("run-button");
@@ -20,7 +21,7 @@ function runSimulation() {
             inputs.setInput( "Scenario ID", 123 );
             inputs.setInput( "{STOP_TIME}", 5256000 ); // 10 years in mins
             text_inputs.innerHTML = "setting inputs: Scenario ID=123 <br>";
-            let simulation = cloudClient.createSimulation(inputs);
+            simulation = cloudClient.createSimulation(inputs);
             startPolling();
             text_outputs.innerHTML = "Getting outputs, running simulation if absent...";
             // return simulation.getOutputsAndRunIfAbsent();
