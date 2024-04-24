@@ -6,7 +6,7 @@ let inputs;
 
 window.onload = () => {
     runButton = document.getElementById("run-button");
-    info = document.getElementById("info");
+    text_outputs = document.getElementById("text_outputs");
     text_inputs = document.getElementById("text_inputs");
 };
 
@@ -18,21 +18,18 @@ function runSimulation() {
             inputs.setInput( "Scenario ID", 123 );
             text_inputs.innerHTML = "setting inputs: Scenario ID=123 <br>";
             let simulation = cloudClient.createSimulation(inputs);
-            info.innerHTML = "Getting outputs, running simulation if absent...";
+            text_outputs.innerHTML = "Getting outputs, running simulation if absent...";
             return simulation.getOutputsAndRunIfAbsent();
         })
         .then( outputs => {
             let html = "done running. Output names: <br>";
             html += "names: "+outputs.names()+"<br>";
-            // html += "raw outputs: "+outputs.getRawOutputs()+"<br>";
             html += "Output scenario ID = "+outputs.value( "Output scenario ID" ) + "<br>";
-            // let html = "For default input = " + inputs.getInput( "Server capacity" ) + ":<br>";
-            // html += "Mean queue size = " + outputs.value( "Mean queue size|Mean queue size" ) + "<br>";
-            // html += "Server utilization = " + outputs.value( "Utilization|Server utilization" ) + "<br>";
-            info.innerHTML = html;
+            html += "raw outputs: "+outputs.getRawOutputs()+"<br>";
+            text_outputs.innerHTML = html;
         })
         .catch( error => {
-            info.innerHTML = error.status + "<br>" + error.message;
+            text_outputs.innerHTML = error.status + "<br>" + error.message;
             console.error( error );
         })
         .finally( () => {
