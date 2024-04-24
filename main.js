@@ -22,9 +22,9 @@ function runSimulation() {
     cloudClient.getLatestModelVersion( "AAirportSecurityDemo" )
         .then( version => {
             inputs = cloudClient.createDefaultInputs( version );
-            inputs.setInput( "Scenario ID", scenarioID );
+            // inputs.setInput( "Scenario ID", scenarioID );
             inputs.setInput( "{STOP_TIME}", 5256000 ); // 10 years in mins
-            text_inputs.innerHTML = "setting inputs: Scenario ID="+scenarioID+" <br>";
+            text_inputs.innerHTML = "setting inputs: Scenario ID="+parseInt(scenario_id.value)+" <br>";
             simulation = cloudClient.createSimulation(inputs);
             startPolling();
             text_outputs.innerHTML = "Getting outputs, running simulation if absent...";
@@ -48,6 +48,10 @@ function runSimulation() {
             stopPolling();
             runButton.disabled = false;
         });
+}
+
+function changeScenarioID() {
+    inputs.setInput( "Scenario ID", parseInt(scenario_id.value)); // get int-value from editbox
 }
 
 let pollingInterval;
