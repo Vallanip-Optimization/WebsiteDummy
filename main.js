@@ -1,17 +1,20 @@
-let cloudClient = CloudClient.create("4b9af5db-a3dc-40f5-ab4f-15daaa246f03"); // default: e05a6efa-ea5f-4adf-b090-ae0ca7d16c20
+let cloudClient = CloudClient.create("4b9af5db-a3dc-40f5-ab4f-15daaa246f03");
 
 let runButton;
 let info;
 let inputs;
 let progress;
 let simulation;
+let scenario_id;
 let scenarioID=124;
 
 window.onload = () => {
+    // connect html elements to JS-variables
     runButton = document.getElementById("run-button");
     text_outputs = document.getElementById("text_outputs");
     text_inputs = document.getElementById("text_inputs");
     progress = document.getElementById( "progress" );
+    scenario_id = document.getElementById( "scenario_id" );
 };
 
 function runSimulation() {
