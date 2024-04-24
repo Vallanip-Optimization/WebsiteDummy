@@ -7,6 +7,7 @@ let inputs;
 window.onload = () => {
     runButton = document.getElementById("run-button");
     info = document.getElementById("info");
+    text_inputs = document.getElementById("text_inputs");
 };
 
 function runSimulation() {
@@ -14,7 +15,8 @@ function runSimulation() {
     cloudClient.getLatestModelVersion( "AAirportSecurityDemo" )
         .then( version => {
             inputs = cloudClient.createDefaultInputs( version );
-            // inputs.setInput( "Server capacity", 8 );
+            inputs.setInput( "Scenario ID", 123 );
+            text_inputs.innerHTML = "setting inputs: Scenario ID=123 <br>";
             let simulation = cloudClient.createSimulation(inputs);
             info.innerHTML = "Getting outputs, running simulation if absent...";
             return simulation.getOutputsAndRunIfAbsent();
