@@ -1,16 +1,16 @@
 <html lang="en">
 <head>
-    <title>AnyLogic Cloud API Example - Run simulation. Minimalistic</title>
-    <script src="https://cloud.anylogic.com/assets/js-client-8.5.0/cloud-client.js"></script>
-    <script src="main.js"></script>
+    <title>Call AirportSecurity remotely</title>
+    <script src="https://cloud.anylogic.com/assets/js-client-8.5.0/cloud-client.js"></script> // needs updating when cloud client version is updated
+    <script src="main.js"></script> // /define which JS file to use
 </head>
 <body>
-    <label for="scenario_id">Scenario-ID to run (between 1 and 15):</label>
-    <input type="number" id="scenario_id" name="scenario_id" min="1" max="15" onchange="changeScenarioID()">
+    <label for="input_ScenarioID">Scenario-ID to run:</label>
+    <input type="number" id="input_ScenarioID" name="input_ScenarioID" min="1" max="15" onchange="changeScenarioID()">
+    <br>
+    <div id="text_inputs">Simulation inputs applied: </div>
     <br>
     <button id="run-button" onclick="runSimulation()">Run simulation</button>
-    <br>
-    <div id="text_inputs">Simulation inputs used: </div>
     <br>
     <div id="text_outputs">The simulation results will be displayed here</div>
     <br>
