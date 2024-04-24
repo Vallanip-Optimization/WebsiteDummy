@@ -21,7 +21,7 @@ function runSimulation() {
         })
         .then( outputs => {
             let html = "done running. Output names: <br>";
-            // html += "names: "+outputs.names()+"<br>";
+            html += "names: "+outputs.names()+"<br>";
             // html += "raw outputs: "+outputs.getRawOutputs()+"<br>";
             // html += "Output scenario ID = "+outputs.value( "output_ScenarioID" ) + "<br>";
             // let html = "For default input = " + inputs.getInput( "Server capacity" ) + ":<br>";
