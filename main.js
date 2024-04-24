@@ -20,8 +20,9 @@ function runSimulation() {
             return simulation.getOutputsAndRunIfAbsent();
         })
         .then( outputs => {
-            let html = "done running" + ":<br>";
-            html += "Output scenario ID = "+outputs.value( "Output scenario ID|Output scenario ID" ) + "<br>";
+            let html = "done running" + "<br>";
+            html += "output names: "+outputs.names();
+            // html += "Output scenario ID = "+outputs.value( "Output scenario ID|Output scenario ID" ) + "<br>";
             // let html = "For default input = " + inputs.getInput( "Server capacity" ) + ":<br>";
             // html += "Mean queue size = " + outputs.value( "Mean queue size|Mean queue size" ) + "<br>";
             // html += "Server utilization = " + outputs.value( "Utilization|Server utilization" ) + "<br>";
