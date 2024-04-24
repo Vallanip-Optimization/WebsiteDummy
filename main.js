@@ -5,8 +5,9 @@ let info;
 let inputs;
 let progress;
 let simulation;
-let scenario_id;
-let scenarioID=1; // use default value of 1
+let input_ScenarioID;
+let val_ScenarioID=1; // use default value of 1
+let val_DurationMins = 525600; // 1 years in mins
 
 window.onload = () => {
     // connect html elements to JS-variables
@@ -14,7 +15,7 @@ window.onload = () => {
     text_outputs = document.getElementById("text_outputs");
     text_inputs = document.getElementById("text_inputs");
     progress = document.getElementById( "progress" );
-    scenario_id = document.getElementById( "scenario_id" );
+    input_ScenarioID = document.getElementById( "input_ScenarioID" );
 };
 
 function runSimulation() {
@@ -22,22 +23,22 @@ function runSimulation() {
     cloudClient.getLatestModelVersion( "AAirportSecurityDemo" )
         .then( version => {
             inputs = cloudClient.createDefaultInputs( version );
-            inputs.setInput( "Scenario ID", scenarioID );
-            inputs.setInput( "{STOP_TIME}", 5256000 ); // 10 years in mins
-            text_inputs.innerHTML = "setting inputs: Scenario ID="+parseInt(scenario_id.value)+" <br>";
+            inputs.setInput( "Scenario ID", val_ScenarioID); // apply whatever user set
+            inputs.setInput( "{STOP_TIME}", val_DurationMins); // How long to run, in mins
+            text_inputs.innerHTML = "Input: Scenario ID="+parseInt(input_ScenarioID.value)+" <br>";
             simulation = cloudClient.createSimulation(inputs);
             startPolling();
             text_outputs.innerHTML = "Getting outputs, running simulation if absent...";
-            // return simulation.getOutputsAndRunIfAbsent();
-            return simulation.run(); // run now, do not wait for results
+            // return simulation.getOutputsAndRunIfAbsent(); // run and wait for results before calling .then(...) below
+            return simulation.run(); // run now, do not wait for results, call .then(...) below directly
         })
         .then( simulation => simulation.waitForCompletion() ) // wait for results before querying outputs
         .then( simulation => simulation.getOutputs() )
         .then( outputs => {
-            let html = "done running. Output names: <br>";
-            html += "names: "+outputs.names()+"<br>";
-            html += "Output scenario ID = "+outputs.value( "Output scenario ID" ) + "<br>";
-            html += "raw outputs: "+outputs.getRawOutputs()+"<br>";
+            let html = "done running. Outputs: <br>";
+            // html += "names: "+outputs.names()+"<br>";
+            html += "    Scenario ID = "+outputs.value( "Output scenario ID" ) + "<br>";
+            // html += "raw outputs: "+outputs.getRawOutputs()+"<br>";
             text_outputs.innerHTML = html;
         })
         .catch( error => {
@@ -51,7 +52,7 @@ function runSimulation() {
 }
 
 function changeScenarioID() {
-    scenarioID = parseInt(scenario_id.value); // store locally here so runSimulation() can pick it up when starting
+    val_ScenarioID = parseInt(input_ScenarioID.value); // store locally here so runSimulation() can pick it up when starting
 }
 
 let pollingInterval;
