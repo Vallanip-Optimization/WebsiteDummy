@@ -21,7 +21,7 @@ window.onload = () => {
 function runSimulation() {
     runButton.disabled = true;
     // cloudClient.getLatestModelVersion( "AAirportSecurityDemo" )
-    cloudClient.getModelVersionByNumber( "AAirportSecurityDemo", 6 ) // get version 6 which works
+    cloudClient.getModelVersionByNumber( "AAirportSecurityDemo", 5 ) // get version 5 which works
         .then( version => {
             inputs = cloudClient.createDefaultInputs( version );
             inputs.setInput( "Scenario ID", val_ScenarioID); // apply whatever user set
