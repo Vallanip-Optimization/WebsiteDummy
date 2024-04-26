@@ -24,6 +24,7 @@ function runSimulation() {
         .then( version => {
             inputs = cloudClient.createDefaultInputs( version );
             inputs.setInput( "Scenario ID", val_ScenarioID); // apply whatever user set
+            inputs.setInput("Is in cloud (dummy, remove)", true); // avoid accessing external Snowflake DB for now
             inputs.setInput( "{STOP_TIME}", val_DurationMins); // How long to run, in mins
             text_inputs.innerHTML = "Input: Scenario ID="+parseInt(input_ScenarioID.value)+" <br>";
             simulation = cloudClient.createSimulation(inputs);
